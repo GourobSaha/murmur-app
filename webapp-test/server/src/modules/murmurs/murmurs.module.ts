@@ -3,9 +3,10 @@ import { MurmursService } from './murmurs.service';
 import { MurmursController } from './murmurs.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Murmur } from './entities/murmur.entity';
+import { UsersModule } from '../users/users.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Murmur])],
+  imports: [TypeOrmModule.forFeature([Murmur]), UsersModule],
   controllers: [MurmursController],
   providers: [MurmursService],
   exports: [MurmursService, TypeOrmModule.forFeature([Murmur])],
