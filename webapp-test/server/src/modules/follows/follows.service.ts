@@ -1,26 +1,45 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFollowDto } from './dto/create-follow.dto';
-import { UpdateFollowDto } from './dto/update-follow.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Follow } from './entities/follow.entity';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class FollowsService {
-  create(createFollowDto: CreateFollowDto) {
-    return 'This action adds a new follow';
+  constructor(
+    @InjectRepository(Follow)
+    private readonly followRepository: Repository<Follow>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+  ) { }
+
+  async toggleFollow(followerId: number, followedId: number): Promise<{ following: boolean }> {
+    if (followerId === followedId) throw new Error('You cannot follow yourself');
+
+    const follower = await this.userRepository.findOne({ where: { id: followerId } });
+    const followed = await this.userRepository.findOne({ where: { id: followedId } });
+
+    if (!follower || !followed) throw new Error('User not found');
+
+    const existing = await this.followRepository.findOne({
+      where: { follower: { id: followerId }, followed: { id: followedId } },
+    });
+
+    if (existing) {
+      await this.followRepository.remove(existing);
+      return { following: false };
+    } else {
+      const follow = this.followRepository.create({ follower, followed });
+      await this.followRepository.save(follow);
+      return { following: true };
+    }
   }
 
-  findAll() {
-    return `This action returns all follows`;
+  async countFollowers(userId: number): Promise<number> {
+    return this.followRepository.count({ where: { followed: { id: userId } } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} follow`;
-  }
-
-  update(id: number, updateFollowDto: UpdateFollowDto) {
-    return `This action updates a #${id} follow`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} follow`;
+  async countFollowing(userId: number): Promise<number> {
+    return this.followRepository.count({ where: { follower: { id: userId } } });
   }
 }
