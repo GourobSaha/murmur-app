@@ -1,34 +1,40 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+// server/src/murmurs/murmurs.controller.ts
+import { Controller, Post, Body, Delete, Param, Get, Query, ParseIntPipe } from '@nestjs/common';
 import { MurmursService } from './murmurs.service';
 import { CreateMurmurDto } from './dto/create-murmur.dto';
-import { UpdateMurmurDto } from './dto/update-murmur.dto';
 
-@Controller('murmurs')
+@Controller('api/murmurs')
 export class MurmursController {
-  constructor(private readonly murmursService: MurmursService) {}
+  constructor(private readonly murmursService: MurmursService) { }
 
-  @Post()
-  create(@Body() createMurmurDto: CreateMurmurDto) {
-    return this.murmursService.create(createMurmurDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.murmursService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.murmursService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMurmurDto: UpdateMurmurDto) {
-    return this.murmursService.update(+id, updateMurmurDto);
+  @Post('create')
+  async create(@Body() dto: CreateMurmurDto) {
+    return this.murmursService.create(dto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.murmursService.remove(+id);
+  async delete(
+    @Param('id', ParseIntPipe) id: number,
+    @Query('userId', ParseIntPipe) userId: number,
+  ) {
+    return this.murmursService.delete(id, userId);
+  }
+
+  @Get('timeline')
+  async getTimeline(
+    @Query('userId', ParseIntPipe) userId: number,
+    @Query('page', ParseIntPipe) page: number = 1,
+  ) {
+    return this.murmursService.getTimeline(userId, page);
+  }
+
+  @Get('user/:userId')
+  async getByUser(@Param('userId', ParseIntPipe) userId: number) {
+    return this.murmursService.findByUser(userId);
+  }
+
+  @Get(':id')
+  async getOne(@Param('id', ParseIntPipe) id: number) {
+    return this.murmursService.findOne(id);
   }
 }
