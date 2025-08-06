@@ -1,4 +1,3 @@
-// server/src/murmurs/murmurs.controller.ts
 import { Controller, Post, Body, Delete, Param, Get, Query, ParseIntPipe } from '@nestjs/common';
 import { MurmursService } from './murmurs.service';
 import { CreateMurmurDto } from './dto/create-murmur.dto';
