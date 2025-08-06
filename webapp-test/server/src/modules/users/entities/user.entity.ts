@@ -11,11 +11,11 @@ export class User {
     @Column({ length: 100 })
     name: string;
 
-    @Column({ length: 100, unique: true, nullable: true })
-    email?: string;
+    @Column({ length: 100, unique: true, nullable: false })
+    email: string;
 
-    @Column({ nullable: true })
-    password?: string;
+    @Column({ nullable: false })
+    password: string;
 
     @OneToMany(() => Murmur, murmur => murmur.user)
     murmurs: Murmur[];
