@@ -1,28 +1,47 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { Routes, Route } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import ProfilePage from './pages/ProfilePage'
+import UsersPage from './pages/UserPage'
+import RegisterPage from './pages/Register'
+import LoginPage from './pages/Login'
+import NavBar from './components/NavBar'
 
 function App() {
-  const [data, setData] = useState<any>(null)
-  
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.post('/api/postTest')
-        console.log(res.data)
-        setData(res.data)
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
-    }
-    
-    fetchData()
-  }, [])
-
   return (
-    <div>
-      <h1>Display the data obtained from API here</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-    </div>
+    <>
+      <Routes>
+        <Route
+          path="/home"
+          element={
+            <>
+              <NavBar />
+              <HomePage />
+            </>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <>
+              <NavBar />
+              <ProfilePage />
+            </>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <>
+              <NavBar />
+              <UsersPage />
+            </>
+          }
+        />
+
+        <Route path="/" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </>
   )
 }
 
