@@ -11,7 +11,7 @@ export class MurmursController {
     return this.murmursService.create(dto);
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   async delete(
     @Param('id', ParseIntPipe) id: number,
     @Query('userId', ParseIntPipe) userId: number,
