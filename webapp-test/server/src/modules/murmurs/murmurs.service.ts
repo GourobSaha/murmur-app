@@ -59,14 +59,16 @@ export class MurmursService {
     return murmurs;
   }
 
-  async getTimeline(userId: number, page: number, pageSize: number = 10): Promise<Murmur[]> {
+  async getTimeline(userId: number, page: number, pageSize: number = 10): Promise<(Murmur & { isLiked: boolean })[]> {
     const offset = (page - 1) * pageSize;
 
     const murmurs = await this.murmurRepository
       .createQueryBuilder('murmur')
       .leftJoin('murmur.user', 'user')
-      .leftJoinAndSelect('murmur.likes', 'likes')
       .addSelect(['user.id', 'user.name'])
+      .leftJoinAndSelect('murmur.likes', 'likes')
+      .leftJoin('likes.user', 'liker')
+      .addSelect(['liker.name', 'liker.email', 'liker.id'])
       .where(new Brackets(qb => {
         qb.where('murmur.userId = :userId')
           .orWhere(qb2 => {
@@ -85,9 +87,18 @@ export class MurmursService {
       .limit(pageSize)
       .getMany();
 
-    return murmurs;
+    // Add isLiked field per murmur
+    const result = murmurs.map(murmur => {
+      const isLiked = murmur.likes.some(like => like.user.id === userId);
+      return {
+        ...murmur,
+        isLiked,
+      };
+    });
+
+    return result;
   }
-  
+
   async findOne(id: number): Promise<Murmur> {
     const murmur = await this.murmurRepository.findOne({
       where: { id },

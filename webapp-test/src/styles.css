@@ -125,50 +125,135 @@ body {
   cursor: not-allowed;
 }
 
-.murmur {
-  border-bottom: 1px solid #e1e8ed;
-  padding: 16px 0;
-  font-size: 1.1rem;
+.page {
+  max-width: 600px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+  padding: 0 15px;
 }
 
-.murmur:last-child {
-  border-bottom: none;
+.murmur-form {
+  margin-bottom: 20px;
 }
 
-.murmur p {
-  margin-bottom: 6px;
-  line-height: 1.4;
+.murmur-textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  resize: vertical;
 }
 
-.murmur small {
-  color: #657786;
-}
-
-.pagination {
-  margin-top: 24px;
-  text-align: center;
-}
-
-.pagination button {
+.murmur-submit-btn {
+  margin-top: 10px;
+  padding: 8px 20px;
   background-color: #1da1f2;
   color: white;
   border: none;
-  padding: 8px 14px;
-  margin: 0 6px;
-  border-radius: 6px;
-  font-weight: 600;
   cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.murmur-submit-btn:hover {
+  background-color: #0d8ddb;
+}
+
+.murmur {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+.murmur-text {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.murmur-meta {
+  color: #555;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.murmur-buttons button {
+  margin-right: 10px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.like-btn {
+  background-color: lightgray;
+  color: #333;
+}
+
+.like-btn.liked {
+  background-color: #e0245e;
+  color: white;
+}
+
+.like-btn:hover {
+  background-color: #d41c54;
+  color: white;
+}
+
+.details-btn {
+  background-color: #657786;
+  color: white;
+}
+
+.details-btn:hover {
+  background-color: #4a586e;
+}
+
+.likes-list {
+  margin-top: 10px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 15px;
+}
+
+.likes-list ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.pagination {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.pagination button {
+  margin: 0 10px;
+  padding: 8px 18px;
+  background-color: #1da1f2;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
 .pagination button:disabled {
-  background-color: #a0d1fa;
+  background-color: #a1cdfa;
   cursor: not-allowed;
 }
 
 .pagination button:hover:not(:disabled) {
   background-color: #0d8ddb;
 }
+
 
 /* Users Page */
 .users-container {
@@ -225,4 +310,15 @@ body {
 
 .follow-btn.unfollow:hover {
   background-color: #c81e4c;
+}
+
+.murmurs-list {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+.murmur-item {
+  margin-left: 10px;
+  padding: 3px 0;
+  border-bottom: 1px solid #ddd;
 }
