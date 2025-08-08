@@ -11,20 +11,21 @@ export default function LoginPage() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
-    try {
-      const response = await axios.post(
-        'http://localhost:3000/api/users/login',
-        form,
-      )
-      //localStorage.setItem('token', response.data.token);
-      navigate('/home')
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Login failed')
-    }
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
+  setError('')
+  try {
+    const response = await axios.post(
+      'http://localhost:3001/api/users/login',
+      form,
+    )
+    const user = response.data 
+    localStorage.setItem('userId', String(user.id)) 
+    navigate('/home')
+  } catch (err: any) {
+    setError(err.response?.data?.message || 'Login failed')
   }
+}
 
   return (
     <div className="auth-container">

@@ -68,3 +68,104 @@ body {
   margin-bottom: 1rem;
   text-align: center;
 }
+
+.page {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 24px 32px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.page h2 {
+  margin-bottom: 24px;
+  font-weight: 700;
+  color: #1da1f2;
+  border-bottom: 2px solid #1da1f2;
+  padding-bottom: 8px;
+}
+
+.auth-form textarea {
+  width: 100%;
+  font-size: 1rem;
+  padding: 12px 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.auth-form textarea:focus {
+  border-color: #1da1f2;
+  outline: none;
+}
+
+.auth-form button {
+  margin-top: 12px;
+  background-color: #1da1f2;
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-form button:hover:not(:disabled) {
+  background-color: #0d8ddb;
+}
+
+.auth-form button:disabled {
+  background-color: #a0d1fa;
+  cursor: not-allowed;
+}
+
+.murmur {
+  border-bottom: 1px solid #e1e8ed;
+  padding: 16px 0;
+  font-size: 1.1rem;
+}
+
+.murmur:last-child {
+  border-bottom: none;
+}
+
+.murmur p {
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.murmur small {
+  color: #657786;
+}
+
+.pagination {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.pagination button {
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  margin: 0 6px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:disabled {
+  background-color: #a0d1fa;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #0d8ddb;
+}
