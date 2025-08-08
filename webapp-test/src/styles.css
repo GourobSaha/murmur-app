@@ -169,3 +169,60 @@ body {
 .pagination button:hover:not(:disabled) {
   background-color: #0d8ddb;
 }
+
+/* Users Page */
+.users-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.users-list {
+  list-style: none;
+  padding: 0;
+}
+
+.user-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  transition: box-shadow 0.2s ease;
+}
+
+.user-card:hover {
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+}
+
+.user-card p {
+  margin: 2px 0 0;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.follow-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 20px;
+  background-color: #1da1f2;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.follow-btn:hover {
+  background-color: #0d8ddb;
+}
+
+.follow-btn.unfollow {
+  background-color: #e0245e;
+}
+
+.follow-btn.unfollow:hover {
+  background-color: #c81e4c;
+}
