@@ -21,6 +21,11 @@ export class UsersController {
     return this.usersService.findOneById(id);
   }
 
+  @Get('except/:id')
+  async findAllExcept(@Param('id', ParseIntPipe) id: number) {
+    return this.usersService.findAllExceptId(+id);
+  }
+
   @Get(':id/followers')
   async getFollowers(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.getFollowers(id);

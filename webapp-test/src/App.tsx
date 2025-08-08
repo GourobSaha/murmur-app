@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import ProfilePage from './pages/ProfilePage'
-// import UsersPage from './pages/UsersPage'
+import UsersPage from './pages/UserPage'
 import RegisterPage from './pages/Register'
 import LoginPage from './pages/Login'
 import NavBar from './components/NavBar'
@@ -33,7 +33,7 @@ function App() {
           element={
             <>
               <NavBar />
-              {/* <UsersPage /> */}
+              <UsersPage />
             </>
           }
         />
